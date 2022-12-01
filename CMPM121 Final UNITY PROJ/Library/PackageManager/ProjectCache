@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638051829482229508
-    m_Hash: 2766358294
+      ticks: 638054750812814203
+    m_Hash: 62489756
   m_LockFileStatus:
     m_FilePath: C:/Users/jarre/Unity Projects/CMPM121-Final/CMPM121 Final UNITY PROJ/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638051829482299524
-    m_Hash: 596906543
+      ticks: 638054750812824206
+    m_Hash: 3208166686
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
