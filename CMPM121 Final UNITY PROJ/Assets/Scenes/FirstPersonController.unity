@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &4668431 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5322228282576598158, guid: 97d8d3c2a0c4fb84c998325220d04727, type: 3}
+  m_PrefabInstance: {fileID: 5322228283782107797}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &89815812
 GameObject:
   m_ObjectHideFlags: 0
@@ -2387,6 +2392,9 @@ MonoBehaviour:
   mat1: {fileID: 2100000, guid: ae299aaeb4b66394fbd90d627bfcfb19, type: 2}
   clue: {fileID: 1359213954}
   clueManagerGameObject: {fileID: 1100300552}
+  detectionRange: 3
+  closeEnough: 0
+  playerLocation: {fileID: 4668431}
 --- !u!65 &1359213956
 BoxCollider:
   m_ObjectHideFlags: 0
