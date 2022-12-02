@@ -8,7 +8,7 @@ public class ClueInteract : MonoBehaviour
     public Material mat1;
     public GameObject clue;
     [SerializeField]
-    GameObject clueManagerGameObject;
+    private GameObject clueManagerGameObject;
 
     private ClueManager clueManager;
 
@@ -17,9 +17,17 @@ public class ClueInteract : MonoBehaviour
     private Bloom bloom;
 
     //proximity detection variables
-    public float detectionRange;
+    [SerializeField]
+    private float detectionRange;
+    
     public bool closeEnough = false;
-    public Transform playerLocation;
+    public bool isFacing = false;
+    [SerializeField]
+    private Transform player;
+    [SerializeField]
+    private Transform playerLight;
+
+    private Vector3 dirFromPlayertoClue;
 
     // Start is called before the first frame update
     void Start()
@@ -35,14 +43,32 @@ public class ClueInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(playerLocation.position, transform.position) <= detectionRange){
+        //check the proximity to the player
+        if (Vector3.Distance(player.position, this.transform.position) <= detectionRange){
             closeEnough = true;
+            
         }
         else {
             closeEnough = false;
         }
 
-        // Debug.Log("Player: " + playerLocation.position);
+        //calculate where the player is facing
+        dirFromPlayertoClue = (this.transform.position - playerLight.transform.position).normalized;
+        float dotProd = Vector3.Dot(dirFromPlayertoClue, playerLight.transform.forward);
+
+        if(dotProd > 0.7){
+            isFacing = true;
+        }
+        else {
+            isFacing = false;
+        }
+
+        if(closeEnough && isFacing == true){
+            StartCoroutine(lightUp());
+        }
+        
+
+        // Debug.Log("Player: " + player.position);
         // Debug.Log("Clue: " + transform.position);
         // if (closeEnough == true){
         //     Debug.Log("In range!");
@@ -52,20 +78,25 @@ public class ClueInteract : MonoBehaviour
         // }
     }
 
-    void OnMouseDown(){ //swap materials and turn on lightup 
-        if (closeEnough == false){
-            return;
-        }
-        else {
-            gameObject.GetComponent<MeshRenderer>().material = mat1;
-            StartCoroutine(lightUp());
-            clueManager.clueOneOn = true;
-            Debug.Log("Clue One Status: " + clueManager.clueOneOn);
-        }
+    // void OnMouseDown(){ //swap materials and turn on lightup 
+    //     if (closeEnough == false){
+    //         return;
+    //     }
+    //     else {
+    //         
+    //         StartCoroutine(lightUp());
+    //         clueManager.clueOneOn = true;
+    //         Debug.Log("Clue One Status: " + clueManager.clueOneOn);
+    //     }
   
-    }
+    // }
+
+
 
     IEnumerator lightUp(){ //changes intensity of glow effect over time
+        gameObject.GetComponent<MeshRenderer>().material = mat1;
+        clueManager.clueOneOn = true;
+
         float bloomVal = bloom.intensity.value;
         for(float intensity = bloomVal; intensity < 20; intensity++){
             bloom.intensity.value = intensity;
