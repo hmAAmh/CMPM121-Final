@@ -6,16 +6,19 @@ using UnityEngine.UI;
 
 public class ClueInteract : MonoBehaviour
 {
-    // public Material mat1;
-    public GameObject clue;
-    [SerializeField] private GameObject clueManagerGameObject;
+    [Header("References")]   
+
+        // public Material mat1;
+        public GameObject clue;
+        [SerializeField] private GameObject clueManagerGameObject;
         private ClueManager clueManager;
         //private ScriptOne clueManagerScr;
 
-    [SerializeField] private GameObject radialIndicatorObject;
+        [SerializeField] private GameObject radialIndicatorObject;
         private RadialIndicator radialIndicator;
 
-    [Header("Glow Effect")]    
+    [Header("Glow Effect")]   
+
         private PostProcessVolume ppVolume;
         private Bloom bloom;
 

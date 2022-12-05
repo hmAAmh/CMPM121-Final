@@ -16,8 +16,8 @@ RenderSettings:
   serializedVersion: 9
   m_Fog: 1
   m_FogColor: {r: 0.00040049947, g: 0.011999255, b: 0.084905684, a: 1}
-  m_FogMode: 1
-  m_FogDensity: 0.3
+  m_FogMode: 2
+  m_FogDensity: 0.1
   m_LinearFogStart: 0
   m_LinearFogEnd: 15
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -6137,6 +6137,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6356483016896457778, guid: a84c68d884f8fa7469a0343424967418, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7be013e6f9ab0ba409c3db15025babaf, type: 2}
     - target: {fileID: 919132149155446097, guid: a84c68d884f8fa7469a0343424967418, type: 3}
       propertyPath: m_Name
       value: Clue4
@@ -6959,6 +6963,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 876312513}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &895108853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 895108854}
+  - component: {fileID: 895108855}
+  m_Layer: 7
+  m_Name: PostProcessingPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &895108854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895108853}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -59.38276, y: 3.7538252, z: -12.898672}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &895108855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895108853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: bab12626e05084844a792b85ae9d8566, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &923058421
 GameObject:
   m_ObjectHideFlags: 0
@@ -13195,6 +13248,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 345597902}
     m_Modifications:
+    - target: {fileID: -9071624046216249438, guid: 278f06decf7286c48ac76927b2413143, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b1f666738217a1649a03569e480fbd74, type: 2}
     - target: {fileID: -8679921383154817045, guid: 278f06decf7286c48ac76927b2413143, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -24312,13 +24369,25 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.62
       objectReference: {fileID: 0}
+    - target: {fileID: 5322228282613394174, guid: 97d8d3c2a0c4fb84c998325220d04727, type: 3}
+      propertyPath: flickerAmount
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5322228282613394175, guid: 97d8d3c2a0c4fb84c998325220d04727, type: 3}
+      propertyPath: m_Cookie
+      value: 
+      objectReference: {fileID: 2800000, guid: 279ec40920818d846a05be906b8b92db, type: 3}
+    - target: {fileID: 5322228282613394175, guid: 97d8d3c2a0c4fb84c998325220d04727, type: 3}
+      propertyPath: m_Color.a
+      value: 0.6313726
+      objectReference: {fileID: 0}
     - target: {fileID: 5322228282613394175, guid: 97d8d3c2a0c4fb84c998325220d04727, type: 3}
       propertyPath: m_Intensity
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5322228282782642109, guid: 97d8d3c2a0c4fb84c998325220d04727, type: 3}
       propertyPath: moveSpeed
-      value: 200
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5322228282782642109, guid: 97d8d3c2a0c4fb84c998325220d04727, type: 3}
       propertyPath: bobAmountIdle
