@@ -76,6 +76,10 @@ public class ClueInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        dirFromPlayertoClue = (this.transform.position - playerLight.transform.position).normalized;
+        float dotProd = Vector3.Dot(dirFromPlayertoClue, playerLight.transform.forward);
+
+        Debug.Log(dotProd);
         
         if (litUp == false){
             checkRuneTrigger();
@@ -96,7 +100,6 @@ public class ClueInteract : MonoBehaviour
         dirFromPlayertoClue = (this.transform.position - playerLight.transform.position).normalized;
         float dotProd = Vector3.Dot(dirFromPlayertoClue, playerLight.transform.forward);
 
-        // Debug.Log(dotProd);
         if((dotProd > detectionDotProductMin) && (dotProd < detectionDotProductMax)){
             isFacing = true;
         }

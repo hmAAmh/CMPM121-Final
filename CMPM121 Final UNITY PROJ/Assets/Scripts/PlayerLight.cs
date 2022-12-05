@@ -32,7 +32,7 @@ public class PlayerLight : MonoBehaviour
     private void Flicker()
     {
         float lightOffset = (Random.Range(0f, lightInitIntensity) * Mathf.Abs(Mathf.Tan(Time.time))) * flickerAmount;
-        Debug.Log(lightOffset);
+        // Debug.Log(lightOffset);
         lightSource.intensity = lightInitIntensity - lightOffset;
     }
 }
