@@ -9,6 +9,13 @@ public class ClueManager : MonoBehaviour
     public GameObject clueOne;
     public bool clueOneOn = false;
 
+    public int numActive;
+    public int numClues;
+
+    public GameObject doorToOpen;
+
+    public bool allCluesFound;
+
     void Start()
     {
         
@@ -17,6 +24,12 @@ public class ClueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(numActive >= numClues && !allCluesFound)
+        {
+            allCluesFound = true;
+            doorToOpen.GetComponent<Animator>().Play("DoorOpen");
+            Debug.Log("All clues activated!");
+
+        }
     }
 }

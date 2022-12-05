@@ -9,37 +9,44 @@ public class ClueInteract : MonoBehaviour
     // public Material mat1;
     public GameObject clue;
     [SerializeField] private GameObject clueManagerGameObject;
-    private ClueManager clueManager;
+        private ClueManager clueManager;
+        //private ScriptOne clueManagerScr;
 
     [SerializeField] private GameObject radialIndicatorObject;
-    private RadialIndicator radialIndicator;
+        private RadialIndicator radialIndicator;
 
-    //variables for glow effect
-    private PostProcessVolume ppVolume;
-    private Bloom bloom;
+    [Header("Glow Effect")]    
+        private PostProcessVolume ppVolume;
+        private Bloom bloom;
 
-    //proximity detection variables
-    [SerializeField]
-    private float detectionDistanceRange;
-    
-    public bool litUp = false;
-    public bool closeEnough = false;
-    public bool isFacing = false;
-    [SerializeField]
-    private Transform player;
-    [SerializeField]
-    private Transform playerLight;
+    [Header("Proximity Detection")]   
 
-    private Vector3 dirFromPlayertoClue;
+        [SerializeField]
+        private float detectionDistanceRange;
+        
+        public bool litUp = false;
+        public bool closeEnough = false;
+        public bool isFacing = false;
+        [SerializeField]
+        private Transform player;
+        [SerializeField]
+        private Transform playerLight;
 
-    public float fadeToRedAmount = 0f;
+        private Vector3 dirFromPlayertoClue;
 
-    public float fadingSpeed = 0.08f;
+        public float fadeToRedAmount = 0f;
 
-    public float detectionDotProductMin;
-    public float detectionDotProductMax;
+        public float fadingSpeed = 0.08f;
 
-    public string myTag;
+        public float detectionDotProductMin;
+        public float detectionDotProductMax;
+
+        public string myTag;
+
+    [Header("Particles")]    
+
+        public GameObject particleSystem;
+        
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +66,8 @@ public class ClueInteract : MonoBehaviour
         // StartCoroutine(lightUp());
      
         // Debug.Log(bloom.intensity.value);
+
+        particleSystem.GetComponent<ParticleSystem>().enableEmission = false;
     }
 
     // Update is called once per frame
@@ -97,7 +106,10 @@ public class ClueInteract : MonoBehaviour
             radialIndicator.shouldUpdate = true;
             radialIndicator.radialIndicatorUI.SetActive(true);
             litUp = true;
-
+            clueManager.numActive++;
+            particleSystem.GetComponent<ParticleSystem>().enableEmission = true;
+            Debug.Log("ACTIVATED RUNE! " + clueManager.numActive + " / 5");
+            
             // StartCoroutine(LightUp());
         }
         // else {
