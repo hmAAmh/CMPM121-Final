@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 public class ClueInteract : MonoBehaviour
 {
     // public Material mat1;
     public GameObject clue;
-    [SerializeField]
-    private GameObject clueManagerGameObject;
-
+    [SerializeField] private GameObject clueManagerGameObject;
     private ClueManager clueManager;
+
+    [SerializeField] private GameObject radialIndicatorObject;
+    private RadialIndicator radialIndicator;
 
     //variables for glow effect
     private PostProcessVolume ppVolume;
@@ -34,22 +36,26 @@ public class ClueInteract : MonoBehaviour
 
     public float fadingSpeed = 0.08f;
 
-    public float currentRed = 0.2f;
-
     public float detectionDotProductMin;
     public float detectionDotProductMax;
+
+    public string myTag;
 
     // Start is called before the first frame update
     void Start()
     {
         //make sure the color is reset
-        gameObject.GetComponent<Renderer>().sharedMaterial.color = new Color(currentRed, 0.2f, 0.2f);
+        gameObject.GetComponent<Renderer>().sharedMaterial.color = new Color(0.2f, 0.2f, 0.2f);
 
         //assign glow effect variables
         ppVolume = GetComponent<PostProcessVolume>();
         ppVolume.profile.TryGetSettings(out bloom);
         clueManager = clueManagerGameObject.GetComponent<ClueManager>();
+        radialIndicator = radialIndicatorObject.GetComponent<RadialIndicator>();
 
+        //grabs tag of object
+        myTag = clue.tag;
+        // Debug.Log(myTag);
         // StartCoroutine(lightUp());
      
         // Debug.Log(bloom.intensity.value);
@@ -62,34 +68,7 @@ public class ClueInteract : MonoBehaviour
         if (litUp == false){
             checkRuneTrigger();
         }
-        
-        // dirFromPlayertoClue = (this.transform.position - playerLight.transform.position).normalized;
-        // float dotProd = Vector3.Dot(dirFromPlayertoClue, playerLight.transform.forward);
-        // // Debug.Log(dotProd);
-        
-        // Debug.Log("Player: " + player.position);
-        // Debug.Log("Clue: " + transform.position);
-        // if (closeEnough == true){
-        //     Debug.Log("In range!");
-        // }
-        // else {
-        //     Debug.Log("Not in range!");
-        // }
     }
-
-    // void OnMouseDown(){ //swap materials and turn on lightup 
-    //     if (closeEnough == false){
-    //         return;
-    //     }
-    //     else {
-    //         
-    //         StartCoroutine(lightUp());
-    //         clueManager.clueOneOn = true;
-    //         Debug.Log("Clue One Status: " + clueManager.clueOneOn);
-    //     }
-  
-    // }
-
 
     private void checkRuneTrigger(){
         //check the proximity to the player
@@ -114,16 +93,25 @@ public class ClueInteract : MonoBehaviour
         }
 
         if(closeEnough && isFacing == true){
-            StartCoroutine(LightUp());
+            radialIndicator.currentClueTag = myTag;
+            radialIndicator.shouldUpdate = true;
+            radialIndicator.radialIndicatorUI.SetActive(true);
+            litUp = true;
+
+            // StartCoroutine(LightUp());
         }
+        // else {
+        //     radialIndicator.shouldUpdate = false;
+        // }
     }
 
-
+    public void startLightUp(){
+        StartCoroutine(LightUp());
+        
+    }
 
     IEnumerator LightUp(){ //changes intensity of glow effect over time
-        // gameObject.GetComponent<MeshRenderer>().sharedMaterial = mat1;
-        // gameObject.GetComponent<Renderer>().sharedMaterial.color = new Color(3f, 0, 0);
-        litUp = true;
+        
         StartCoroutine(FadeToRed());
         clueManager.clueOneOn = true;
 
@@ -138,9 +126,9 @@ public class ClueInteract : MonoBehaviour
     IEnumerator FadeToRed(){
         for (float i = 0.2f; i <= 3f; i += 0.15f){
             Color c = gameObject.GetComponent<Renderer>().sharedMaterial.color;
-            c.r = i;
-            c.g += 0.01f;
-            c.b += 0.01f;
+            c.r += i;
+            c.g -= 0.01f;
+            c.b -= 0.01f;
 
             gameObject.GetComponent<Renderer>().sharedMaterial.color = c;
 

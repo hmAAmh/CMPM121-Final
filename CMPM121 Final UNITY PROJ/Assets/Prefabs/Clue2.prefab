@@ -120,9 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a885554b856e28545a89965c780764a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mat1: {fileID: 2100000, guid: ae299aaeb4b66394fbd90d627bfcfb19, type: 2}
   clue: {fileID: 2074382574791608249}
   clueManagerGameObject: {fileID: 0}
+  radialIndicatorObject: {fileID: 0}
   detectionDistanceRange: 12
   litUp: 0
   closeEnough: 0
@@ -131,9 +131,9 @@ MonoBehaviour:
   playerLight: {fileID: 0}
   fadeToRedAmount: 0
   fadingSpeed: 0.08
-  currentRed: 0.2
   detectionDotProductMin: 0.6
   detectionDotProductMax: 0.68
+  myTag: 
 --- !u!1 &8561005982818247814
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f4bf50436eae3747ba3d4205df091bc, type: 2}
+  - {fileID: 2100000, guid: f748a4dff256b3d4a89c34c58c893dd8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

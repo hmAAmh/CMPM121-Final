@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Clue1
+  - Clue2
+  - Clue3
+  - Clue4
+  - Clue5
   layers:
   - Default
   - TransparentFX
