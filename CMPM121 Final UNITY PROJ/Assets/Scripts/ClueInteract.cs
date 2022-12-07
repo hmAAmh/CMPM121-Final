@@ -122,7 +122,7 @@ public class ClueInteract : MonoBehaviour
             Debug.Log("ACTIVATED RUNE! " + clueManager.numActive + " / 5");
 
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/clueFound");
-            FMOD.Studio.EventInstance ambLayer = FMODUnity.RuntimeManager.CreateInstance("event:/AMB/clueLayer1");
+            FMOD.Studio.EventInstance ambLayer = FMODUnity.RuntimeManager.CreateInstance(ambLayerToPlay);
             ambLayer.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(this.gameObject));
             ambLayer.start();
 
