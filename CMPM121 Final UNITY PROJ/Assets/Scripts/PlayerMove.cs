@@ -1,37 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class PlayerMove : MonoBehaviour
 {
     [Header("Movement")]    
 
-    public float moveSpeed;
+        public float moveSpeed;
 
-    public Transform orientation;
-   
-    float horzInput;
-    float vertInput;
+        public Transform orientation;
+    
+        float horzInput;
+        float vertInput;
+        bool playerIsMoving;
 
-    Vector3 moveDirection;
+        Vector3 moveDirection;
 
-    Rigidbody rb;
+        Rigidbody rb;
 
     [Header("HeadBob")]    
 
-    public float bobAmountIdle;
-    public float bobAmountActive;
-    public float bobTimeOffset;
-    public float bobLerpTime;
+        public float bobAmountIdle;
+        public float bobAmountActive;
+        public float bobTimeOffset;
+        public float bobLerpTime;
 
-    public Transform camHolder;
+        public Transform camHolder;
 
-    float curBob;
-    float curBobLerpTime;
+        float curBob;
+        float curBobLerpTime;
 
-    bool bobIsIdle;
-    bool bobIsActive;
-    
+        bool bobIsIdle;
+        bool bobIsActive;
+
+    // Audio
+    [Header("Audio")] 
+
+        FMOD.Studio.EventInstance footStepsSFX;
+
+        bool footstepsPlaying;
 
     Vector3 bobRotation;
 
@@ -42,12 +50,15 @@ public class PlayerMove : MonoBehaviour
         rb.freezeRotation = true;
 
         curBob = bobAmountIdle;
+        
+        footStepsSFX = FMODUnity.RuntimeManager.CreateInstance("event:/SFX/footsteps");
     }
 
     private void Update()
     {
         MyInput();
         HeadBob();
+        FootstepPlay();
     }
 
     private void FixedUpdate()
@@ -59,6 +70,8 @@ public class PlayerMove : MonoBehaviour
     {
         horzInput = Input.GetAxisRaw("Horizontal");
         vertInput = Input.GetAxisRaw("Vertical");
+
+        playerIsMoving = (horzInput != 0 || vertInput != 0);
     }
 
     private void MovePlayer()
@@ -70,7 +83,7 @@ public class PlayerMove : MonoBehaviour
 
     private void HeadBob()
     {
-        if(horzInput == 0 && vertInput == 0)
+        if(!playerIsMoving)
         {
             BobLerp(ref bobIsIdle, ref bobIsActive, bobAmountIdle);
         }
@@ -94,5 +107,20 @@ public class PlayerMove : MonoBehaviour
             }
             curBob = Mathf.Lerp(curBob, lerpDest, curBobLerpTime / bobLerpTime);
             curBobLerpTime += Time.deltaTime;
+    }
+
+    private void FootstepPlay()
+    {
+        if(!footstepsPlaying && playerIsMoving)
+        {
+            footStepsSFX.start(); 
+            footstepsPlaying = true;
+        }
+        else if(footstepsPlaying && !playerIsMoving)
+        {
+            footStepsSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            //footStepsSFX.release();
+            footstepsPlaying = false;
+        }
     }
 }

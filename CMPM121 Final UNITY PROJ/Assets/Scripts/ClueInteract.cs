@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+using FMODUnity;
 
 public class ClueInteract : MonoBehaviour
 {
@@ -49,7 +50,10 @@ public class ClueInteract : MonoBehaviour
     [Header("Particles")]    
 
         public GameObject particleSystem;
-        
+
+    [Header("Sounds")]
+
+        public string ambLayerToPlay;
 
     // Start is called before the first frame update
     void Start()
@@ -113,8 +117,15 @@ public class ClueInteract : MonoBehaviour
             radialIndicator.radialIndicatorUI.SetActive(true);
             litUp = true;
             clueManager.numActive++;
+
             particleSystem.GetComponent<ParticleSystem>().enableEmission = true;
             Debug.Log("ACTIVATED RUNE! " + clueManager.numActive + " / 5");
+
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/clueFound");
+            FMOD.Studio.EventInstance ambLayer = FMODUnity.RuntimeManager.CreateInstance("event:/AMB/clueLayer1");
+            ambLayer.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(this.gameObject));
+            ambLayer.start();
+
             
             // StartCoroutine(LightUp());
         }

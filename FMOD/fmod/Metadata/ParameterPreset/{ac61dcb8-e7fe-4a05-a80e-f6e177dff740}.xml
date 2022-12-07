@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{ac61dcb8-e7fe-4a05-a80e-f6e177dff740}">
+		<property name="name">
+			<value>footStepPanning</value>
+		</property>
+		<relationship name="folder">
+			<destination>{05f81a62-41ef-4ba5-8182-a479af2d768c}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{2af577d0-93c7-4f6e-a3f6-85d094fec4b4}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{2af577d0-93c7-4f6e-a3f6-85d094fec4b4}">
+		<property name="minimum">
+			<value>-1</value>
+		</property>
+		<property name="initialValue">
+			<value>1</value>
+		</property>
+	</object>
+</objects>
